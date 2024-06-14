@@ -1,7 +1,8 @@
 export const checkUserAccess = async (
   prisma: any,
   userId: any,
-  postId: any
+  postId?: any,
+  Boolean?: boolean
 ) => {
   const user = await prisma.user.findUnique({
     where: {
@@ -12,27 +13,29 @@ export const checkUserAccess = async (
   if (!user) {
     return {
       userError: "User not found!",
-      post: null,
+      result: null,
     };
   }
 
-  const post = await prisma.post.findUnique({
-    where: {
-      id: postId,
-    },
-  });
+  if (Boolean) {
+    const post = await prisma.post.findUnique({
+      where: {
+        id: postId,
+      },
+    });
 
-  if (!post) {
-    return {
-      userError: "post not found!",
-      post: null,
-    };
-  }
+    if (!post) {
+      return {
+        userError: "post not found!",
+        result: null,
+      };
+    }
 
-  if (post.authorId !== user.id) {
-    return {
-      userError: "Post not owned by User!",
-      post: null,
-    };
+    if (post.authorId !== user.id) {
+      return {
+        userError: "Post not owned by User!",
+        result: null,
+      };
+    }
   }
 };

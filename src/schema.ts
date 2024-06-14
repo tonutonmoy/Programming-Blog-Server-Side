@@ -4,7 +4,8 @@ export const typeDefs = `#graphql
         users: [User]
         posts: [Post]
         singlePost (postId: ID!): Post
-        profile(userId: ID!): Profile
+        myPosts: AllPostPayload
+        profile: profilePayload
     }
 
     type Mutation {
@@ -33,7 +34,8 @@ export const typeDefs = `#graphql
         content: String!
         author: User
         createdAt: String!
-        published: Boolean!
+        published: String!
+        isDeleted: String!
     }
 
     type User {
@@ -63,7 +65,15 @@ export const typeDefs = `#graphql
 
     type PostPayload {
         userError: String
-        post: Post
+        result: Post
+    }
+    type AllPostPayload {
+        userError: String
+        result: [Post]
+    }
+    type profilePayload {
+        userError: String
+        result: Profile 
     }
 
     input ProfileInfo {

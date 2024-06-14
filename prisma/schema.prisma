@@ -24,6 +24,7 @@ model Post {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   published Published  @default(true)
+  isDeleted IsDeleted  @default(true)
 
   @@map("posts")
 }
@@ -56,6 +57,11 @@ model Profile {
   @@map("profiles")
 }
 
+enum IsDeleted {
+
+true
+false
+}
 enum Published {
 
 true

@@ -5,7 +5,7 @@ export const postResolvers = {
     if (!userInfo) {
       return {
         userError: "Unauthorized",
-        post: null,
+        result: null,
       };
     }
 
@@ -20,58 +20,69 @@ export const postResolvers = {
 
     return {
       userError: null,
-      post: newPost,
+      result: newPost,
     };
   },
   updatePost: async (parent: any, args: any, { prisma, userInfo }: any) => {
-    console.log(args);
     if (!userInfo) {
       return {
         userError: "Unauthorized",
-        post: null,
+        result: null,
       };
     }
 
-    const error = await checkUserAccess(prisma, userInfo.userId, args.postId);
+    const error = await checkUserAccess(
+      prisma,
+      userInfo.userId,
+      args.postId,
+      true
+    );
     if (error) {
       return error;
     }
 
     const updatedPost = await prisma.post.update({
       where: {
-        id: Number(args.postId),
+        id: args.postId,
       },
       data: args.post,
     });
 
     return {
       userError: null,
-      post: updatedPost,
+      result: updatedPost,
     };
   },
   deletePost: async (parent: any, args: any, { prisma, userInfo }: any) => {
-    console.log(args);
     if (!userInfo) {
       return {
         userError: "Unauthorized",
-        post: null,
+        result: null,
       };
     }
 
-    const error = await checkUserAccess(prisma, userInfo.userId, args.postId);
+    const error = await checkUserAccess(
+      prisma,
+      userInfo.userId,
+      args.postId,
+      true
+    );
     if (error) {
       return error;
     }
 
-    const deletedPost = await prisma.post.delete({
+    const deletedPost = await prisma.post.update({
       where: {
-        id: Number(args.postId),
+        id: args.postId,
+      },
+      data: {
+        isDeleted: false,
       },
     });
 
     return {
       userError: null,
-      post: deletedPost,
+      result: deletedPost,
     };
   },
   publishPost: async (parent: any, args: any, { prisma, userInfo }: any) => {
@@ -79,11 +90,11 @@ export const postResolvers = {
     if (!userInfo) {
       return {
         userError: "Unauthorized",
-        post: null,
+        result: null,
       };
     }
 
-    const error = await checkUserAccess(prisma, userInfo.userId, args.postId);
+    const error = await checkUserAccess(prisma, userInfo.userId);
     if (error) {
       return error;
     }
@@ -99,7 +110,7 @@ export const postResolvers = {
 
     return {
       userError: null,
-      post: updatedPost,
+      result: updatedPost,
     };
   },
 };
