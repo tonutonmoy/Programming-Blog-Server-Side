@@ -47,7 +47,8 @@ export const authResolvers = {
 
     const token = await jwtHelper.generateToken(
       { userId: newUser.id },
-      config.jwt.secret as string
+      config.jwt.secret as string,
+      config.jwt.expires as string
     );
     return {
       userError: null,
@@ -78,7 +79,8 @@ export const authResolvers = {
     }
     const token = await jwtHelper.generateToken(
       { userId: user.id },
-      config.jwt.secret as string
+      config.jwt.secret as string,
+      config.jwt.expires as string
     );
     return {
       userError: null,
