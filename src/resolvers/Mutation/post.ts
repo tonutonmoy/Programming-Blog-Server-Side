@@ -61,12 +61,7 @@ export const postResolvers = {
       };
     }
 
-    const error = await checkUserAccess(
-      prisma,
-      userInfo.userId,
-      args.postId,
-      true
-    );
+    const error = await checkUserAccess(prisma, userInfo.userId);
     if (error) {
       return error;
     }
@@ -101,7 +96,7 @@ export const postResolvers = {
 
     const updatedPost = await prisma.post.update({
       where: {
-        id: Number(args.postId),
+        id: args.postId,
       },
       data: {
         published: true,

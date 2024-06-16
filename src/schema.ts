@@ -4,6 +4,7 @@ export const typeDefs = `#graphql
         users: [User]
         posts: [Post]
         singlePost (postId: ID!): Post
+        requestedPosts: AllPostPayload
         myPosts: AllPostPayload
         profile: ProfileQueryPayload
     }

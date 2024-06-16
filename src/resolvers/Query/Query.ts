@@ -87,4 +87,28 @@ export const Query = {
       result: result,
     };
   },
+  // get requested  post
+  requestedPosts: async (parent: any, args: any, { prisma, userInfo }: any) => {
+    if (!userInfo) {
+      return {
+        userError: "unauthorized ",
+        result: null,
+      };
+    }
+    const error = await checkUserAccess(prisma, userInfo.userId);
+    if (error) {
+      return error;
+    }
+    const result = await prisma.post.findMany({
+      where: {
+        isDeleted: true,
+        published: false,
+      },
+    });
+
+    return {
+      userError: null,
+      result: result,
+    };
+  },
 };
