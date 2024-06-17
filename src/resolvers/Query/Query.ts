@@ -57,7 +57,7 @@ export const Query = {
     return await prisma.post.findUnique({
       where: {
         id: args.postId,
-        published: true,
+
         isDeleted: true,
       },
     });

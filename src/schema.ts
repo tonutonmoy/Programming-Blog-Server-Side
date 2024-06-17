@@ -27,6 +27,7 @@ export const typeDefs = `#graphql
         deletePost(postId: ID!): PostPayload,
         publishPost(postId: ID!): PostPayload
         updateProfile(profile: ProfileInfo!, user: UserInfo! ): ProfilePayload,
+        updateUserRole(userId:ID!, userRole: String! ): UserRolePayload,
     }
 
     type Post {
@@ -44,10 +45,12 @@ export const typeDefs = `#graphql
         id: ID!  
         name: String!
         email: String!
+        role: String!
         createdAt: String!
         profile: Profile
         posts: [Post]
     }
+
 
     type Profile {
         id: ID!
@@ -58,6 +61,12 @@ export const typeDefs = `#graphql
         number: String!      
         createdAt: String!
         user: User!
+    }
+
+
+    type UserRolePayload {
+       userError: String
+        result: User
     }
 
     type UserAndProfile {

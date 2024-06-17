@@ -23,7 +23,7 @@ model Post {
   author    User     @relation(fields: [authorId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  published Published  @default(true)
+  published Published  @default(false)
   isDeleted IsDeleted  @default(true)
 
   @@map("posts")
@@ -34,6 +34,7 @@ model User {
   name      String
   email     String      @unique
   password  String
+  role      UserRole    @default(user)
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
   posts     Post[]
@@ -66,4 +67,9 @@ enum Published {
 
 true
 false
+}
+enum UserRole {
+
+admin
+user
 }
