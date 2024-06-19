@@ -24,14 +24,18 @@ const main = async () => {
 
   const { url } = await startStandaloneServer(server, {
     listen: { port: 4000 },
-    context: async ({ req }): Promise<Context> => {
-      const userInfo = await jwtHelper.getUserInfoFromToken(
-        req.headers.authorization as string
-      );
-      return {
-        prisma,
-        userInfo,
-      };
+    context: async ({ req }): Promise<any> => {
+      try {
+        const userInfo = await jwtHelper.getUserInfoFromToken(
+          req.headers.authorization as string
+        );
+        return {
+          prisma,
+          userInfo,
+        };
+      } catch (error) {
+        console.log(error);
+      }
     },
   });
 
