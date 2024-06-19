@@ -37,6 +37,6 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
             }
         }),
     });
-    console.log(`🚀  Server ready at: ${url}`);
+    console.log(`  Server ready at: ${url}`);
 });
 main();
