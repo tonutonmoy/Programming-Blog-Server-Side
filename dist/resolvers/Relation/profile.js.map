@@ -1,0 +1,1 @@
+{"version":3,"file":"profile.js","sourceRoot":"","sources":["../../../src/resolvers/Relation/profile.ts"],"names":[],"mappings":";;;AAAa,QAAA,OAAO,GAAG;IACrB,IAAI,EAAE,KAAK,EAAE,MAAW,EAAE,IAAS,EAAE,EAAE,MAAM,EAAE,QAAQ,EAAO,EAAE,EAAE;QAChE,OAAO,MAAM,MAAM,CAAC,IAAI,CAAC,UAAU,CAAC;YAClC,KAAK,EAAE;gBACL,EAAE,EAAE,MAAM,CAAC,MAAM;aAClB;SACF,CAAC,CAAC;IACL,CAAC;CACF,CAAC"}

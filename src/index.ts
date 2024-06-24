@@ -1,7 +1,7 @@
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 
-import { Prisma, PrismaClient } from "@prisma/client";
+import { PrismaClient, Prisma } from "@prisma/client";
 import { DefaultArgs } from "@prisma/client/runtime/library";
 import { jwtHelper } from "./utils/jwtHelper";
 import { typeDefs } from "./schema";
@@ -11,9 +11,7 @@ export const prisma = new PrismaClient();
 
 interface Context {
   prisma: PrismaClient<Prisma.PrismaClientOptions, never, DefaultArgs>;
-  userInfo: {
-    userId: number | null;
-  } | null;
+  userInfo: any | null;
 }
 
 const main = async () => {
@@ -24,7 +22,7 @@ const main = async () => {
 
   const { url } = await startStandaloneServer(server, {
     listen: { port: 4000 },
-    context: async ({ req }): Promise<any> => {
+    context: async ({ req }): Promise<Context | undefined> => {
       try {
         const userInfo = await jwtHelper.getUserInfoFromToken(
           req.headers.authorization as string
@@ -34,12 +32,18 @@ const main = async () => {
           userInfo,
         };
       } catch (error) {
-        console.log(error);
+        console.error("Error in context function:", error);
+        return {
+          prisma,
+          userInfo: null,
+        };
       }
     },
   });
 
-  console.log(`  Server ready at: ${url}`);
+  console.log(`Server ready at: ${url}`);
 };
 
-main();
+main().catch((error) => {
+  console.error("Error starting server:", error);
+});

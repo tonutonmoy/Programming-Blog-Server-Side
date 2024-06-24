@@ -1,5 +1,11 @@
 -- CreateEnum
+CREATE TYPE "IsDeleted" AS ENUM ('true', 'false');
+
+-- CreateEnum
 CREATE TYPE "Published" AS ENUM ('true', 'false');
+
+-- CreateEnum
+CREATE TYPE "UserRole" AS ENUM ('admin', 'user');
 
 -- CreateTable
 CREATE TABLE "posts" (
@@ -10,7 +16,8 @@ CREATE TABLE "posts" (
     "authorId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "published" "Published" NOT NULL DEFAULT 'true',
+    "published" "Published" NOT NULL DEFAULT 'false',
+    "isDeleted" "IsDeleted" NOT NULL DEFAULT 'true',
 
     CONSTRAINT "posts_pkey" PRIMARY KEY ("id")
 );
@@ -23,6 +30,7 @@ CREATE TABLE "users" (
     "password" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "role" "UserRole" NOT NULL DEFAULT 'user',
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
 );
@@ -31,13 +39,19 @@ CREATE TABLE "users" (
 CREATE TABLE "profiles" (
     "id" TEXT NOT NULL,
     "image" TEXT NOT NULL,
-    "bio" TEXT NOT NULL,
+    "bio" TEXT DEFAULT 'Not Available',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" TEXT NOT NULL,
+    "city" TEXT DEFAULT 'Not Available',
+    "country" TEXT DEFAULT 'Not Available',
+    "number" TEXT DEFAULT 'Not Available',
 
     CONSTRAINT "profiles_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "profiles_userId_key" ON "profiles"("userId");
