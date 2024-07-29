@@ -1,0 +1,8 @@
+[phases]
+setup = "npm install"
+build = "npm run build"
+start = "npm run deploy"
+
+[variables]
+NODE_ENV = "production"
+DATABASE_URL = "ostgresql://postgres:ZUQvXwqwLgcHfOXfVzEPKRzOrbJwzLJV@viaduct.proxy.rlwy.net:25045/railway"

@@ -1,6 +1,15 @@
 "use strict";
 // import { ApolloServer } from "@apollo/server";
 // import { startStandaloneServer } from "@apollo/server/standalone";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -57,17 +66,17 @@ const resolvers_1 = require("./resolvers");
 const body_parser_1 = require("body-parser");
 const cors_1 = __importDefault(require("cors"));
 exports.prisma = new client_1.PrismaClient();
-const startServer = async () => {
+const startServer = () => __awaiter(void 0, void 0, void 0, function* () {
     const app = (0, express_1.default)();
     const server = new server_1.ApolloServer({
         typeDefs: schema_1.typeDefs,
         resolvers: resolvers_1.resolvers,
     });
-    await server.start();
+    yield server.start();
     app.use('/graphql', (0, cors_1.default)(), (0, body_parser_1.json)(), (0, express4_1.expressMiddleware)(server, {
-        context: async ({ req }) => {
+        context: (_a) => __awaiter(void 0, [_a], void 0, function* ({ req }) {
             try {
-                const userInfo = await jwtHelper_1.jwtHelper.getUserInfoFromToken(req.headers.authorization);
+                const userInfo = yield jwtHelper_1.jwtHelper.getUserInfoFromToken(req.headers.authorization);
                 return {
                     prisma: exports.prisma,
                     userInfo,
@@ -80,7 +89,7 @@ const startServer = async () => {
                     userInfo: null,
                 };
             }
-        },
+        }),
     }));
     app.get('/health', (req, res) => {
         res.send('Server is healthy');
@@ -88,7 +97,7 @@ const startServer = async () => {
     app.listen(4000, () => {
         console.log(`Server is running on http://localhost:4000/graphql`);
     });
-};
+});
 startServer().catch((error) => {
     console.error("Error starting server:", error);
 });
