@@ -1,1 +1,0 @@
-{"version":3,"file":"post.d.ts","sourceRoot":"","sources":["../../../src/resolvers/Mutation/post.ts"],"names":[],"mappings":"AAEA,eAAO,MAAM,aAAa;sBACA,GAAG,YAAY,GAAG,wBAAwB,GAAG;;;;;;;yBAsB1C,GAAG,QAAQ,GAAG,wBAAwB,GAAG;;;;yBA8BzC,GAAG,QAAQ,GAAG,wBAAwB,GAAG;;;;0BA2BxC,GAAG,QAAQ,GAAG,wBAAwB,GAAG;;;;CA4BtE,CAAC"}
