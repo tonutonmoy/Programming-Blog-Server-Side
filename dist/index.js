@@ -76,7 +76,7 @@ const startServer = () => __awaiter(void 0, void 0, void 0, function* () {
     yield server.start();
     app.use('/graphql', (0, cors_1.default)({
         origin: 'http://localhost:5173', // Adjust this to match your client URL
-        methods: ['GET', 'POST', 'PUT', 'Pacth', 'DELETE', 'OPTIONS'],
+        methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization'],
     }), (0, body_parser_1.json)(), (0, express4_1.expressMiddleware)(server, {
         context: (_a) => __awaiter(void 0, [_a], void 0, function* ({ req }) {
@@ -99,8 +99,9 @@ const startServer = () => __awaiter(void 0, void 0, void 0, function* () {
     app.get('/health', (req, res) => {
         res.send('Server is healthy');
     });
-    app.listen(4000, () => {
-        console.log(`Server is running on http://localhost:4000/graphql`);
+    const PORT = process.env.PORT || 4000;
+    app.listen(PORT, () => {
+        console.log(`Server is running on http://localhost:${PORT}/graphql`);
     });
 });
 startServer().catch((error) => {
