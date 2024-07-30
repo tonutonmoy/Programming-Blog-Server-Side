@@ -52,7 +52,7 @@
 
 
 
-// src/index.ts
+
 // src/index.ts
 import express from 'express';
 import { ApolloServer } from "@apollo/server";
@@ -85,7 +85,7 @@ const startServer = async () => {
     '/graphql',
     cors<cors.CorsRequest>({
       origin: 'http://localhost:5173', // Adjust this to match your client URL
-      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+      methods: ['GET', 'POST', 'PUT','Pacth', 'DELETE', 'OPTIONS'],
       allowedHeaders: ['Content-Type', 'Authorization'],
     }),
     json(),
@@ -114,9 +114,8 @@ const startServer = async () => {
     res.send('Server is healthy');
   });
 
-  const PORT = process.env.PORT || 4000;
-  app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}/graphql`);
+  app.listen(4000, () => {
+    console.log(`Server is running on http://localhost:4000/graphql`);
   });
 };
 
