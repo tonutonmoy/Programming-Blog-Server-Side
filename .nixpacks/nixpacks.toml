@@ -1,5 +1,5 @@
 [languages]
-nodejs = "18"  # Specify the Node.js version
+nodejs = "18"  
 
 [phases]
 setup = "npm ci"
