@@ -1,8 +1,11 @@
+[languages]
+nodejs = "18"  # Specify the Node.js version
+
 [phases]
-setup = "npm install"
+setup = "npm ci"
 build = "npm run build"
 start = "npm run deploy"
 
 [variables]
 NODE_ENV = "production"
-DATABASE_URL = "postgresql://postgres:ZUQvXwqwLgcHfOXfVzEPKRzOrbJwzLJV@viaduct.proxy.rlwy.net:25045/railway"
+DATABASE_URL = "${postgresql://postgres:ZUQvXwqwLgcHfOXfVzEPKRzOrbJwzLJV@viaduct.proxy.rlwy.net:25045/railway}"  
