@@ -1,18 +1,23 @@
-# Use the official Node.js 18 image.
+# Use the official Node.js 18 image
 FROM node:18
 
-# Create and change to the app directory.
+# Create and change to the app directory
 WORKDIR /app
 
-# Install production dependencies.
+# Copy package.json and package-lock.json
 COPY package*.json ./
-RUN npm ci --only=production
 
-# Copy app files.
+# Install dependencies
+RUN npm ci
+
+# Copy the rest of the application
 COPY . .
 
 # Build the app
 RUN npm run build
+
+# Expose the port the app runs on
+EXPOSE 4000
 
 # Run Prisma migrations
 RUN npx prisma migrate deploy
