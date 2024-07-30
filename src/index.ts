@@ -53,6 +53,7 @@
 
 
 // src/index.ts
+// src/index.ts
 import express from 'express';
 import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from '@apollo/server/express4';
@@ -82,7 +83,11 @@ const startServer = async () => {
 
   app.use(
     '/graphql',
-    cors<cors.CorsRequest>(),
+    cors<cors.CorsRequest>({
+      origin: 'http://localhost:5173', // Adjust this to match your client URL
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+      allowedHeaders: ['Content-Type', 'Authorization'],
+    }),
     json(),
     expressMiddleware(server, {
       context: async ({ req }): Promise<Context> => {

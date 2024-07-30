@@ -56,6 +56,7 @@ exports.prisma = void 0;
 //   console.error("Error starting server:", error);
 // });
 // src/index.ts
+// src/index.ts
 const express_1 = __importDefault(require("express"));
 const server_1 = require("@apollo/server");
 const express4_1 = require("@apollo/server/express4");
@@ -73,7 +74,11 @@ const startServer = () => __awaiter(void 0, void 0, void 0, function* () {
         resolvers: resolvers_1.resolvers,
     });
     yield server.start();
-    app.use('/graphql', (0, cors_1.default)(), (0, body_parser_1.json)(), (0, express4_1.expressMiddleware)(server, {
+    app.use('/graphql', (0, cors_1.default)({
+        origin: 'http://localhost:5173', // Adjust this to match your client URL
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+        allowedHeaders: ['Content-Type', 'Authorization'],
+    }), (0, body_parser_1.json)(), (0, express4_1.expressMiddleware)(server, {
         context: (_a) => __awaiter(void 0, [_a], void 0, function* ({ req }) {
             try {
                 const userInfo = yield jwtHelper_1.jwtHelper.getUserInfoFromToken(req.headers.authorization);
