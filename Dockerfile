@@ -1,26 +1,22 @@
-# Use the official Node.js 18 image
 FROM node:18
 
-# Create and change to the app directory
+# Set working directory
 WORKDIR /app
 
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Install dependencies
-RUN npm ci
+# Install dependencies with legacy peer dependencies option
+RUN npm ci --legacy-peer-deps
 
 # Copy the rest of the application
 COPY . .
 
-# Build the app
+# Build the application
 RUN npm run build
 
-# Expose the port the app runs on
-EXPOSE 4000
+# Set environment variables
+ENV NODE_ENV=production
 
-# Run Prisma migrations
-RUN npx prisma migrate deploy
-
-# Start the app
-CMD ["npm", "run", "start"]
+# Start the application
+CMD ["npm", "run", "deploy"]
