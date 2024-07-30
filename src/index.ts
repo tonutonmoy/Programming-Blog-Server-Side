@@ -85,7 +85,7 @@ const startServer = async () => {
     '/graphql',
     cors<cors.CorsRequest>({
       origin: 'http://localhost:5173', // Adjust this to match your client URL
-      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+      methods: ['GET', 'POST', 'PUT','Pacth', 'DELETE', 'OPTIONS'],
       allowedHeaders: ['Content-Type', 'Authorization'],
     }),
     json(),
