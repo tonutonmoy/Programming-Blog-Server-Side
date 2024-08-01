@@ -85,7 +85,7 @@ const startServer = async () => {
     '/graphql',
     cors<cors.CorsRequest>({
       // origin: 'http://localhost:5173', 
-      origin: 'https://programming-blog-client-side.vercel.app', 
+      origin: 'https://programming-blog-client-side.web.app', 
       methods: ['GET', 'POST', 'PUT','PATCH', 'DELETE', 'OPTIONS'],
       allowedHeaders: ['Content-Type', 'Authorization'],
     }),

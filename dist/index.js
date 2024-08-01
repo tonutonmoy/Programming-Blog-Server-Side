@@ -75,7 +75,7 @@ const startServer = () => __awaiter(void 0, void 0, void 0, function* () {
     yield server.start();
     app.use('/graphql', (0, cors_1.default)({
         // origin: 'http://localhost:5173', 
-        origin: 'https://programming-blog-client-side.vercel.app',
+        origin: 'https://programming-blog-client-side.web.app',
         methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization'],
     }), (0, body_parser_1.json)(), (0, express4_1.expressMiddleware)(server, {
