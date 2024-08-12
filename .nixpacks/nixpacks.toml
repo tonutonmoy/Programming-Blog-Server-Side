@@ -8,4 +8,4 @@ start = "npm run deploy"
 
 [variables]
 NODE_ENV = "production"
-DATABASE_URL = "postgresql://postgres:ZUQvXwqwLgcHfOXfVzEPKRzOrbJwzLJV@viaduct.proxy.rlwy.net:25045/railway"
+DATABASE_URL = "postgresql://postgres:yuqEwjGDpQEWJvjDZcotCXhaRVUPPEuW@roundhouse.proxy.rlwy.net:42476/railway"
